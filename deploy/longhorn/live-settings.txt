@@ -1,0 +1,116 @@
+allow-collecting-longhorn-usage-metrics: true
+allow-empty-disk-selector-volume: true
+allow-empty-node-selector-volume: true
+allow-live-engine-upgrade-on-same-image-commit: false
+allow-recurring-job-while-volume-detached: false
+allow-volume-creation-with-degraded-availability: true
+auto-cleanup-recurring-job-backup-snapshot: true
+auto-cleanup-snapshot-after-on-demand-backup-completed: false
+auto-cleanup-system-generated-snapshot: true
+auto-cleanup-when-delete-backup: false
+auto-delete-pod-when-volume-detached-unexpectedly: true
+auto-salvage: true
+backing-image-cleanup-wait-interval: 60
+backing-image-recovery-wait-interval: 300
+backup-compression-method: lz4
+backup-concurrent-limit: 2
+backup-execution-timeout: 1
+blacklist-for-auto-delete-pod-when-volume-detached-unexpectedly: 
+concurrent-automatic-engine-upgrade-per-node-limit: 0
+concurrent-backing-image-replenish-per-node-limit: 5
+concurrent-replica-rebuild-per-node-limit: 5
+concurrent-volume-backup-restore-per-node-limit: 5
+crd-api-version: longhorn.io/v1beta2
+create-default-disk-labeled-nodes: true
+csi-allowed-topology-keys: 
+csi-storage-capacity-tracking: false
+current-longhorn-version: v1.12.1
+data-engine-cpu-isolation-enabled: {"v2":"false"}
+data-engine-cpu-mask: {"v2":"0x3"}
+data-engine-hugepage-enabled: {"v2":"true"}
+data-engine-interrupt-mode-enabled: {"v2":"false"}
+data-engine-iobuf-large-pool-size: {"v2":"1024"}
+data-engine-iobuf-small-pool-size: {"v2":"8192"}
+data-engine-log-flags: {"v2":""}
+data-engine-log-level: {"v2":"Notice"}
+data-engine-memory-size: {"v2":"2048"}
+data-engine-number-of-cpu-cores: {"v2":"0"}
+default-backing-image-manager-image: docker.io/longhornio/backing-image-manager:v1.12.1
+default-backup-block-size: 2
+default-data-locality: disabled
+default-data-path: /var/lib/longhorn/
+default-engine-image: docker.io/longhornio/longhorn-engine:v1.12.1
+default-instance-manager-image: docker.io/longhornio/longhorn-instance-manager:v1.12.1
+default-longhorn-static-storage-class: longhorn-static
+default-min-number-of-backing-image-copies: 3
+default-replica-count: {"v1":"3","v2":"3"}
+default-ublk-number-of-queue: {"v2":"1"}
+default-ublk-queue-depth: {"v2":"128"}
+deleting-confirmation-flag: false
+detach-manually-attached-volumes-when-cordoned: false
+disable-revision-counter: {"v1":"true"}
+disable-scheduling-on-cordoned-node: true
+disable-snapshot-purge: false
+endpoint-network-for-rwx-volume: 
+engine-image-pod-liveness-probe-failure-threshold: 3
+engine-image-pod-liveness-probe-period: 5
+engine-image-pod-liveness-probe-timeout: 4
+engine-replica-timeout: {"v1":"8","v2":"8"}
+failed-backup-ttl: 1440
+fast-replica-rebuild-enabled: {"v1":"true","v2":"true"}
+freeze-filesystem-for-snapshot: {"v1":"false"}
+guaranteed-instance-manager-cpu: {"v1":"12","v2":"12"}
+instance-manager-pod-liveness-probe-timeout: 10
+kubernetes-cluster-autoscaler-enabled: false
+kubernetes-metrics-server-metrics-enabled: true
+latest-longhorn-version: v1.12.1
+log-level: Info
+log-path: /var/lib/longhorn/logs/
+long-grpc-timeout: 86400
+manager-url: 
+node-disk-health-monitoring: true
+node-down-pod-deletion-policy: do-nothing
+node-drain-policy: block-if-contains-last-replica
+offline-replica-rebuilding: false
+orphan-resource-auto-deletion: 
+orphan-resource-auto-deletion-grace-period: 300
+priority-class: longhorn-critical
+recurring-failed-jobs-history-limit: 1
+recurring-job-max-retention: 100
+recurring-successful-jobs-history-limit: 1
+registry-secret: 
+remove-snapshots-during-filesystem-trim: false
+replica-auto-balance: disabled
+replica-auto-balance-disk-pressure-percentage: 90
+replica-disk-soft-anti-affinity: true
+replica-file-sync-http-client-timeout: 30
+replica-rebuild-concurrent-sync-limit: {"v1":"1"}
+replica-rebuilding-bandwidth-limit: {"v2":"0"}
+replica-replenishment-wait-interval: 600
+replica-soft-anti-affinity: false
+replica-zone-soft-anti-affinity: true
+restore-concurrent-limit: 2
+restore-volume-recurring-jobs: false
+rwx-volume-fast-failover: false
+snapshot-count-warning-threshold: 100
+snapshot-data-integrity: {"v1":"fast-check","v2":"fast-check"}
+snapshot-data-integrity-cronjob: {"v1":"0 0 */7 * *","v2":"0 0 */7 * *"}
+snapshot-data-integrity-immediate-check-after-snapshot-creation: {"v1":"false","v2":"false"}
+snapshot-heavy-task-concurrent-limit: 5
+snapshot-max-count: 250
+stable-longhorn-versions: v1.10.2,v1.11.3,v1.12.1,v1.3.3,v1.4.4,v1.5.5,v1.6.4,v1.7.3,v1.8.2,v1.9.2
+storage-minimal-available-percentage: 10
+storage-network: 
+storage-over-provisioning-percentage: 100
+storage-reserved-percentage-for-default-disk: 30
+support-bundle-failed-history-limit: 1
+support-bundle-manager-image: docker.io/longhornio/support-bundle-kit:v0.0.92
+support-bundle-node-collection-timeout: 30
+system-managed-components-node-selector: 
+system-managed-csi-components-resource-limits: 
+system-managed-pods-image-pull-policy: if-not-present
+taint-toleration: 
+upgrade-checker: true
+upgrade-responder-url: https://longhorn-upgrade-responder.rancher.io/v1/checkupgrade
+v1-data-engine: true
+v2-data-engine: false

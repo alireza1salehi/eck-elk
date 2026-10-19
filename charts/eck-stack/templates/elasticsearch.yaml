@@ -1,0 +1,135 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: {{ .Values.elasticsearch.name }}
+  namespace: {{ .Values.namespace }}
+spec:
+  version: {{ .Values.elasticsearch.version }}
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: false
+    service:
+      spec:
+        type: {{ .Values.elasticsearch.service.type }}
+        ports:
+          - name: https
+            port: {{ .Values.elasticsearch.service.port | int }}
+            targetPort: 9200
+            nodePort: {{ .Values.elasticsearch.service.nodePort | int }}
+  nodeSets:
+    - name: master
+      count: {{ .Values.elasticsearch.nodes.master.count }}
+      config:
+        node.roles: ["master"]
+        node.store.allow_mmap: false
+      podTemplate:
+        spec:
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - weight: 100
+                  podAffinityTerm:
+                    topologyKey: kubernetes.io/hostname
+                    labelSelector:
+                      matchLabels:
+                        elasticsearch.k8s.elastic.co/cluster-name: {{ .Values.elasticsearch.name }}
+                        elasticsearch.k8s.elastic.co/statefulset-name: {{ .Values.elasticsearch.name }}-es-master
+          containers:
+            - name: elasticsearch
+              image: {{ .Values.elasticsearch.image }}
+              resources:
+                requests:
+                  cpu: {{ .Values.elasticsearch.nodes.master.resources.requests.cpu }}
+                  memory: {{ .Values.elasticsearch.nodes.master.resources.requests.memory }}
+                limits:
+                  cpu: {{ .Values.elasticsearch.nodes.master.resources.limits.cpu }}
+                  memory: {{ .Values.elasticsearch.nodes.master.resources.limits.memory }}
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+{{- with .Values.elasticsearch.nodes.master.storageClassName }}
+            storageClassName: {{ . | quote }}
+{{- end }}
+            resources:
+              requests:
+                storage: {{ .Values.elasticsearch.nodes.master.storageSize }}
+
+    - name: hot
+      count: {{ .Values.elasticsearch.nodes.hot.count }}
+      config:
+        node.roles: ["data_hot", "data_content", "ingest"]
+        node.store.allow_mmap: false
+      podTemplate:
+        spec:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchLabels:
+                      elasticsearch.k8s.elastic.co/cluster-name: {{ .Values.elasticsearch.name }}
+                      elasticsearch.k8s.elastic.co/statefulset-name: {{ .Values.elasticsearch.name }}-es-hot
+          containers:
+            - name: elasticsearch
+              image: {{ .Values.elasticsearch.image }}
+              resources:
+                requests:
+                  cpu: {{ .Values.elasticsearch.nodes.hot.resources.requests.cpu }}
+                  memory: {{ .Values.elasticsearch.nodes.hot.resources.requests.memory }}
+                limits:
+                  cpu: {{ .Values.elasticsearch.nodes.hot.resources.limits.cpu }}
+                  memory: {{ .Values.elasticsearch.nodes.hot.resources.limits.memory }}
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+{{- with .Values.elasticsearch.nodes.hot.storageClassName }}
+            storageClassName: {{ . | quote }}
+{{- end }}
+            resources:
+              requests:
+                storage: {{ .Values.elasticsearch.nodes.hot.storageSize }}
+
+    - name: warm
+      count: {{ .Values.elasticsearch.nodes.warm.count }}
+      config:
+        node.roles: ["data_warm", "data_content"]
+        node.store.allow_mmap: false
+      podTemplate:
+        spec:
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                - topologyKey: kubernetes.io/hostname
+                  labelSelector:
+                    matchLabels:
+                      elasticsearch.k8s.elastic.co/cluster-name: {{ .Values.elasticsearch.name }}
+                      elasticsearch.k8s.elastic.co/statefulset-name: {{ .Values.elasticsearch.name }}-es-warm
+          containers:
+            - name: elasticsearch
+              image: {{ .Values.elasticsearch.image }}
+              resources:
+                requests:
+                  cpu: {{ .Values.elasticsearch.nodes.warm.resources.requests.cpu }}
+                  memory: {{ .Values.elasticsearch.nodes.warm.resources.requests.memory }}
+                limits:
+                  cpu: {{ .Values.elasticsearch.nodes.warm.resources.limits.cpu }}
+                  memory: {{ .Values.elasticsearch.nodes.warm.resources.limits.memory }}
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data
+          spec:
+            accessModes:
+              - ReadWriteOnce
+{{- with .Values.elasticsearch.nodes.warm.storageClassName }}
+            storageClassName: {{ . | quote }}
+{{- end }}
+            resources:
+              requests:
+                storage: {{ .Values.elasticsearch.nodes.warm.storageSize }}

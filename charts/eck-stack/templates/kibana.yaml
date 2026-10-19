@@ -1,0 +1,23 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: {{ .Values.kibana.name }}
+  namespace: {{ .Values.kibana.namespace }}
+spec:
+  version: {{ .Values.kibana.version }}
+  image: {{ .Values.kibana.image }}
+  count: {{ .Values.kibana.count }}
+  elasticsearchRef:
+    name: {{ .Values.elasticsearch.name }}
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: false
+    service:
+      spec:
+        type: {{ .Values.kibana.service.type }}
+        ports:
+          - name: https
+            port: {{ .Values.kibana.service.port | int }}
+            targetPort: 5601
+            nodePort: {{ .Values.kibana.service.nodePort | int }}

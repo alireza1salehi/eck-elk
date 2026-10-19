@@ -1,0 +1,90 @@
+namespace: elastic
+elasticsearch:
+  name: elasticsearch
+  version: 9.4.2
+  image: "docker.arvancloud.ir/elasticsearch:9.4.2"
+  publicURL: "elasticsearch-es-http.elastic.svc"
+  nodes:
+    master:
+      name: master
+      count: 1
+      storageClassName: longhorn
+      storageSize: 1Gi
+      resources:
+        requests:
+          cpu: 1
+          memory: 2Gi
+        limits:
+          cpu: 1
+          memory: 2Gi
+    hot:
+      name: hot
+      count: 1
+      storageClassName: longhorn-hot
+      storageSize: 0.4Gi
+      resources:
+        requests:
+          cpu: 1
+          memory: 2Gi
+        limits:
+          cpu: 1
+          memory: 2Gi
+    warm:
+      name: warm
+      count: 1
+      storageClassName: longhorn-warm
+      storageSize: 0.1Gi    
+      resources:
+        requests:
+          cpu: 1
+          memory: 2Gi
+        limits:
+          cpu: 1
+          memory: 2Gi
+
+  service:
+    type: NodePort
+    port: 9200
+    nodePort: 32000
+
+kibana:
+  name: kibana
+  namespace: elastic
+  version: "9.4.2"
+  image: "docker.arvancloud.ir/kibana:9.4.2"
+  storageClassName: longhorn
+  count: 1
+  updateStrategy:
+    maxSurge: 1
+    maxUnavailable: 0
+  service:
+    type: NodePort
+    port: 5601
+    nodePort: 32601
+  fleet:
+    enabled: true
+    bootstrap:
+      enabled: true
+      name: kibana-post-install-configs
+
+ilm:
+  enabled: true
+  policyName: "caspian-logs-ilm-policy"
+  phases:
+    hot:
+      maxAge: "1d"
+      maxSize: "10g"
+    warm:
+      minAge: "7d"
+    delete:
+      minAge: "10d"
+
+
+
+epr:
+  enabled: true
+  name: elastic-package-registry
+  namespace: elastic
+  image: "repository.caspian.com:8443/package-registry:v9.4.2"
+  service:
+    port: 8080

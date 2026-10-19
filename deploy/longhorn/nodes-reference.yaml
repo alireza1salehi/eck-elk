@@ -1,0 +1,365 @@
+apiVersion: v1
+items:
+- apiVersion: longhorn.io/v1beta2
+  kind: Node
+  metadata:
+    creationTimestamp: "2026-10-14T07:32:39Z"
+    finalizers:
+    - longhorn.io
+    generation: 2
+    name: worker-02
+    namespace: longhorn-system
+    resourceVersion: "1383635"
+    uid: c46d9b91-1ca8-401c-96e6-7cbfb6e96eff
+  spec:
+    allowScheduling: true
+    disks:
+      hot:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /hot
+        storageReserved: 621549158
+        tags:
+        - hot
+      public:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /var/lib/longhorn
+        storageReserved: 10737418240
+        tags:
+        - public
+      warm:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /warm
+        storageReserved: 1558285516
+        tags:
+        - warm
+    evictionRequested: false
+    instanceManagerCPURequest: 0
+    name: worker-02
+    tags: []
+  status:
+    autoEvicting: false
+    conditions:
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:34:08Z"
+      message: Node worker-02 is ready
+      reason: ""
+      status: "True"
+      type: Ready
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:39Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Schedulable
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:39Z"
+      message: All required packages [nfs-common open-iscsi cryptsetup dmsetup] are
+        installed
+      reason: ""
+      status: "True"
+      type: RequiredPackages
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:39Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Multipathd
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:39Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: NFSClientInstalled
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:39Z"
+      message: Kernel modules [dm_crypt] are loaded
+      reason: ""
+      status: "True"
+      type: KernelModulesLoaded
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:33:09Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: MountPropagation
+    cpuPolicy: none
+    diskStatus:
+      hot:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T07:34:08Z"
+          message: Disk hot(/hot) on node worker-02 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T07:34:08Z"
+          message: Disk hot(/hot) on node worker-02 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: hot
+        diskPath: /hot
+        diskType: filesystem
+        diskUUID: 3f17071f-c347-49d8-bcd8-57edf13e9365
+        filesystemType: ext2/ext3
+        healthDataLastCollectedAt: "2026-10-19T12:23:09Z"
+        instanceManagerName: instance-manager-fd4374a3b56617eb324137976dc57948
+        scheduledBackingImage: {}
+        scheduledReplica: {}
+        storageAvailable: 1992294400
+        storageMaximum: 2071830528
+        storageScheduled: 0
+      public:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T07:34:08Z"
+          message: Disk public(/var/lib/longhorn) on node worker-02 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T07:34:08Z"
+          message: Disk public(/var/lib/longhorn) on node worker-02 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: default-disk-6f32de935a58dfe1
+        diskPath: /var/lib/longhorn
+        diskType: filesystem
+        diskUUID: 85f482d1-0937-4510-90a8-4fdee2eb0c50
+        filesystemType: ext2/ext3
+        healthDataLastCollectedAt: "2026-10-19T12:23:09Z"
+        instanceManagerName: instance-manager-fd4374a3b56617eb324137976dc57948
+        scheduledBackingImage: {}
+        scheduledReplica:
+          pvc-bc1b0c4e-0459-4de0-8f72-17624a1a0d38-r-73325870: 1073741824
+        storageAvailable: 74029465600
+        storageMaximum: 104028168192
+        storageScheduled: 1073741824
+      warm:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T07:34:08Z"
+          message: Disk warm(/warm) on node worker-02 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T07:34:08Z"
+          message: Disk warm(/warm) on node worker-02 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: warm
+        diskPath: /warm
+        diskType: filesystem
+        diskUUID: c5e6b30a-50ff-448b-acae-1652412bab40
+        filesystemType: ext2/ext3
+        healthDataLastCollectedAt: "2026-10-19T12:23:09Z"
+        instanceManagerName: instance-manager-fd4374a3b56617eb324137976dc57948
+        scheduledBackingImage: {}
+        scheduledReplica:
+          pvc-2d87bbe4-d686-4982-9cf9-52267a313124-r-167cc7f7: 109051904
+        storageAvailable: 5033164800
+        storageMaximum: 5194285056
+        storageScheduled: 109051904
+    region: ""
+    snapshotCheckStatus:
+      lastPeriodicCheckedAt: "2026-10-15T00:00:00Z"
+    zone: ""
+- apiVersion: longhorn.io/v1beta2
+  kind: Node
+  metadata:
+    creationTimestamp: "2026-10-14T07:32:38Z"
+    finalizers:
+    - longhorn.io
+    generation: 2
+    name: worker-03
+    namespace: longhorn-system
+    resourceVersion: "1383947"
+    uid: 1d4f6ad9-fbe1-42fe-beed-ca11d4d04ce7
+  spec:
+    allowScheduling: true
+    disks:
+      hot:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /hot
+        storageReserved: 621549158
+        tags:
+        - hot
+      public:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /var/lib/longhorn
+        storageReserved: 10737418240
+        tags:
+        - public
+      warm:
+        allowScheduling: true
+        diskDriver: ""
+        diskType: filesystem
+        evictionRequested: false
+        path: /warm
+        storageReserved: 1558285516
+        tags:
+        - warm
+    evictionRequested: false
+    instanceManagerCPURequest: 0
+    name: worker-03
+    tags: []
+  status:
+    autoEvicting: false
+    conditions:
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: Node worker-03 is ready
+      reason: ""
+      status: "True"
+      type: Ready
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Schedulable
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: MountPropagation
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: All required packages [dmsetup nfs-common open-iscsi cryptsetup] are
+        installed
+      reason: ""
+      status: "True"
+      type: RequiredPackages
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: Multipathd
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: ""
+      reason: ""
+      status: "True"
+      type: NFSClientInstalled
+    - lastProbeTime: ""
+      lastTransitionTime: "2026-10-14T07:32:38Z"
+      message: Kernel modules [dm_crypt] are loaded
+      reason: ""
+      status: "True"
+      type: KernelModulesLoaded
+    cpuPolicy: none
+    diskStatus:
+      hot:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T08:14:38Z"
+          message: Disk hot(/hot) on node worker-03 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T08:14:38Z"
+          message: Disk hot(/hot) on node worker-03 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: hot
+        diskPath: /hot
+        diskType: filesystem
+        diskUUID: a3caa264-1454-42db-a6ef-88dfe8c74567
+        filesystemType: ext2/ext3
+        healthDataLastCollectedAt: "2026-10-19T12:24:38Z"
+        instanceManagerName: instance-manager-ba8c59c93870a0c116035a6d04645a15
+        scheduledBackingImage: {}
+        scheduledReplica:
+          pvc-91292356-6be2-4419-ab8d-8610853b072f-r-fd38d103: 429916160
+        storageAvailable: 1887436800
+        storageMaximum: 2071830528
+        storageScheduled: 429916160
+      public:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T08:14:38Z"
+          message: Disk public(/var/lib/longhorn) on node worker-03 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T08:14:38Z"
+          message: Disk public(/var/lib/longhorn) on node worker-03 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: default-disk-6f32de935a58dfe1
+        diskPath: /var/lib/longhorn
+        diskType: filesystem
+        diskUUID: b752f306-7c07-42d6-8778-24af6cc29443
+        filesystemType: ext2/ext3
+        healthDataLastCollectedAt: "2026-10-19T12:24:38Z"
+        instanceManagerName: instance-manager-ba8c59c93870a0c116035a6d04645a15
+        scheduledBackingImage: {}
+        scheduledReplica:
+          pvc-bc1b0c4e-0459-4de0-8f72-17624a1a0d38-r-2daf3836: 1073741824
+        storageAvailable: 171127603200
+        storageMaximum: 208661176320
+        storageScheduled: 1073741824
+      warm:
+        conditions:
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T08:14:38Z"
+          message: Disk warm(/warm) on node worker-03 is ready
+          reason: ""
+          status: "True"
+          type: Ready
+        - lastProbeTime: ""
+          lastTransitionTime: "2026-10-14T08:14:38Z"
+          message: Disk warm(/warm) on node worker-03 is schedulable
+          reason: ""
+          status: "True"
+          type: Schedulable
+        diskDriver: ""
+        diskName: warm
+        diskPath: /warm
+        diskType: filesystem
+        diskUUID: 905be6f5-e503-4218-b7b7-b89eeddb0fe4
+        filesystemType: ext2/ext3
+        healthDataLastCollectedAt: "2026-10-19T12:24:38Z"
+        instanceManagerName: instance-manager-ba8c59c93870a0c116035a6d04645a15
+        scheduledBackingImage: {}
+        scheduledReplica: {}
+        storageAvailable: 5138022400
+        storageMaximum: 5194285056
+        storageScheduled: 0
+    region: ""
+    snapshotCheckStatus:
+      lastPeriodicCheckedAt: "2026-10-15T00:00:00Z"
+    zone: ""
+kind: List
+metadata:
+  resourceVersion: ""

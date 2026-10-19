@@ -1,0 +1,10 @@
+defaultSettings:
+  createDefaultDiskLabeledNodes: true
+  storageMinimalAvailablePercentage: 10
+  storageOverProvisioningPercentage: 100
+persistence:
+  defaultClass: true
+  defaultClassReplicaCount: 2
+  defaultDiskSelector:
+    enable: true
+    selector: public
